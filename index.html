@@ -6,65 +6,59 @@
   <title>Superball Keno</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div class="top">
+<div class="top">
+  <h1>🎰 SUPERBALL KENO</h1>
 
-    <h1>🎰 SUPERBALL KENO</h1>
-
-    <div class="meters">
-
-      <div class="meter">
-        <div class="label">CREDITS</div>
-        <div id="credits">1000</div>
-      </div>
-
-      <div class="meter">
-        <div class="label">BET</div>
-        <div id="bet">1</div>
-      </div>
-
-      <div class="meter">
-        <div class="label">WIN</div>
-        <div id="win">0</div>
-      </div>
-
+  <div class="meters">
+    <div class="meter">
+      <div class="label">CREDITS</div>
+      <div id="credits">1000</div>
     </div>
 
-    <div class="controls">
-      <button id="quickPick">🎲 Quick Pick</button>
-      <button id="clear">🗑 Erase</button>
-      <button id="betDown">➖ Bet</button>
-      <button id="betUp">➕ Bet</button>
-      <button id="play">🎰 PLAY GAME</button>
+    <div class="meter">
+      <div class="label">BET</div>
+      <div id="bet">1</div>
     </div>
 
+    <div class="meter">
+      <div class="label">WIN</div>
+      <div id="win">0</div>
+    </div>
   </div>
 
-  <main>
+  <div class="controls">
+    <button id="quickPick">🎲 Quick Pick</button>
+    <button id="clear">🗑 Erase</button>
+    <button id="betDown">➖ Bet</button>
+    <button id="betUp">➕ Bet</button>
+    <button id="play">🎰 PLAY GAME</button>
+  </div>
+</div>
 
-    <section id="ball-drop">
-  <div id="currentBall" class="ball hidden"></div>
-    </section>
+<main>
 
-    <!-- Keno Grid -->
-    <section id="keno-grid"></section>
+  <section id="ball-drop">
+    <div id="currentBall" class="ball hidden"></div>
+  </section>
 
-    <!-- Drawn Numbers -->
-    <section class="draw-panel">
+  <section id="keno-grid"></section>
+
+  <section class="draw-panel">
     <h2>DRAWN BALLS</h2>
     <div id="drawnNumbers" class="draw-grid"></div>
-</section>
+  </section>
 
-    <!-- Game Messages -->
-    <section class="message-panel">
-      <div id="message">Select up to 10 numbers and press PLAY.</div>
-    </section>
+  <section class="message-panel">
+    <div id="message">
+      Select up to 10 numbers, then press PLAY.
+    </div>
+  </section>
 
-  </main>
+</main>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
   </html>
