@@ -175,3 +175,20 @@ document.getElementById("play").onclick = async () => {
 
 createBoard();
 updateMeters();
+const currentBall = document.getElementById("currentBall");
+
+async function showBall(number){
+
+    currentBall.classList.remove("hidden");
+
+    currentBall.classList.remove("drop");
+
+    void currentBall.offsetWidth;
+
+    currentBall.textContent = number;
+
+    currentBall.classList.add("drop");
+
+    await new Promise(r=>setTimeout(r,450));
+
+    }
