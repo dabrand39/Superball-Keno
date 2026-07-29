@@ -194,3 +194,35 @@ main{
         filter: brightness(1);
     }
 }
+#ball-tray{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  min-height:48px;
+  margin:10px auto;
+}
+
+.ball{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#ffd700;
+  color:#000;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #fff;
+  box-shadow:0 0 8px rgba(255,215,0,.7);
+  animation:pop .25s ease;
+}
+
+@keyframes pop{
+  from{
+    transform:scale(0);
+  }
+  to{
+    transform:scale(1);
+  }
+    }
