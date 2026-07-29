@@ -169,6 +169,10 @@ document.getElementById("play").onclick = async () => {
         win = paytable[hits] * bet;
         credits += win;
     }
+    highlightHits();
+    updateMeters();
+playing = false;
+    
     function updateDrawBoard(){
         
     const board = document.getElementById("drawnNumbers");
