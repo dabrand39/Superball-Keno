@@ -169,20 +169,22 @@ document.getElementById("play").onclick = async () => {
         win = paytable[hits] * bet;
         credits += win;
     }
+    function updateDrawBoard(){
 
-    updateMeters();
-};
+    const board = document.getElementById("drawnNumbers");
 
-createBoard();
-updateMeters();
-const currentBall = document.getElementById("currentBall");
+    board.innerHTML = "";
 
-for (const number of drawNumbers) {
+    drawnNumbers.forEach(number=>{
 
-    await showBall(number);
+        const ball=document.createElement("div");
 
-    drawnNumbers.push(number);
+        ball.className="draw-ball";
 
-    updateDrawBoard();
+        ball.textContent=number;
+
+        board.appendChild(ball);
+
+    });
 
 }
