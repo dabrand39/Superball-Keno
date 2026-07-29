@@ -1,5 +1,5 @@
 const grid = document.getElementById("keno-grid");
-const drawArea = document.getElementById("drawn-balls");
+const drawArea = document.getElementById("drawn-Numbers");
 
 let credits = 1000;
 let bet = 1;
