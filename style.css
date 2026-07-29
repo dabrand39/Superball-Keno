@@ -226,3 +226,43 @@ main{
     transform:scale(1);
   }
     }
+.draw-ball{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff, #ffe066 35%, #f5b400 100%);
+  color:#111;
+  font-weight:bold;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #fff;
+  box-shadow:0 0 12px gold;
+  animation:ballRoll .35s ease-out;
+}
+
+@keyframes ballRoll{
+  0%{
+    transform:translateX(-80px) rotate(-540deg) scale(.4);
+    opacity:0;
+  }
+  100%{
+    transform:translateX(0) rotate(0deg) scale(1);
+    opacity:1;
+  }
+}
+
+.hit{
+  animation:hitFlash .5s ease-in-out 2;
+}
+
+@keyframes hitFlash{
+  0%,100%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.25);
+    box-shadow:0 0 20px #00ff00;
+  }
+    }
