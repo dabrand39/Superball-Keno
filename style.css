@@ -171,3 +171,9 @@ main{
     border-radius:8px;
     text-align:center;
     }
+.superball {
+    background: gold;
+    color: black;
+    border: 3px solid red;
+    box-shadow: 0 0 15px gold;
+    }
