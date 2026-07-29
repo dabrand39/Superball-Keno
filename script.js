@@ -47,7 +47,6 @@ function updateMeters() {
   betEl.textContent = bet;
   winEl.textContent = win;
 }
-
 function createBoard() {
 
   grid.innerHTML = "";
