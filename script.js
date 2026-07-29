@@ -238,7 +238,7 @@ if (drawnNumbers.length === 20) {
 const payout = paytable[hits] || 0;
 
 if (payout > 0) {
-
+document.body.classList.add("winner");
     win = payout * bet;
     credits += win;
 
@@ -255,7 +255,9 @@ if (payout > 0) {
 }
 
 updateMeters();
-
+  setTimeout(() => {
+    document.body.classList.remove("winner");
+}, 2000);
 playing = false;
 
 currentBall.classList.add("hidden");
