@@ -173,3 +173,122 @@ async function animateDraw(numbers) {
         await new Promise(r => setTimeout(r, 350));
     }
             }
+document.getElementById("play").onclick = async () => {
+
+    if (selected.length === 0) {
+        alert("Select 1 to 10 numbers.");
+        return;
+    }
+
+    if (credits < bet) {
+        alert("Not enough credits.");
+        return;
+    }
+
+    credits -= bet;
+    win = 0;
+
+    updateMeters();
+
+    drawArea.innerHTML = "";
+
+    document.querySelectorAll(".number").forEach(n => {
+        n.classList.remove("hit");
+        n.classList.remove("superball");
+    });
+
+    const balls = [];
+
+    while (balls.length < 20) {
+        let n = Math.floor(Math.random() * 80) + 1;
+
+        if (!balls.includes(n))
+            balls.push(n);
+    }
+
+    let hits = 0;
+
+    for (let i = 0; i < balls.length; i++) {
+
+        const ball = balls[i];
+
+        const chip = document.createElement("div");
+
+        chip.className = "draw-ball";
+        chip.textContent = ball;
+
+        if (i === 19)
+            chip.classList.add("superball");
+
+        drawArea.appendChild(chip);
+
+        const square =
+            document.querySelector(`[data-number="${ball}"]`);
+
+        if (selected.includes(ball)) {
+
+            hits++;
+
+            square.classList.add("hit");
+
+            if (i === 19)
+                square.classList.add("superball");
+        }
+
+        await new Promise(r => setTimeout(r, 250));
+    }
+
+    const paytable = {
+        4: 1,
+        5: 3,
+        6: 8,
+        7: 50,
+        8: 300,
+        9: 1500,
+        10: 5000
+    };
+
+    if (paytable[hits]) {
+        win = paytable[hits] * bet;
+        credits += win;
+    }
+
+    updateMeters();
+};
+// ---------- Game Initialization ----------
+
+createBoard();
+updateMeters();
+
+console.log("Superball Keno Loaded");
+
+// Optional: Press Enter to play
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        document.getElementById("play").click();
+    }
+});
+
+// Optional: Double-click a selected number to remove it
+grid.addEventListener("dblclick", (e) => {
+
+    if (!e.target.classList.contains("number")) return;
+
+    const num = Number(e.target.dataset.number);
+
+    if (selected.includes(num)) {
+        selected = selected.filter(n => n !== num);
+        e.target.classList.remove("selected");
+    }
+
+});
+
+// Future Features:
+// - Superball multiplier
+// - Real Keno paytable
+// - Gamble feature
+// - DIP switch settings
+// - Auto Play
+// - Sound effects
+// - Ball blower animation
+// - Progressive jackpot
