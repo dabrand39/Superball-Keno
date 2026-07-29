@@ -234,8 +234,6 @@ if (drawnNumbers.length === 20) {
             .classList.add("hit");
 
     }
-if (drawnNumbers.length === 20) {
-    ball.classList.add("superball");
 
     ball.animate(
         [
