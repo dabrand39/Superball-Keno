@@ -2,101 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Superball Keno</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superball Keno V2</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+<header class="top">
 
-<div class="title">
-🎰 SUPERBALL KENO
-</div>
+<h1>🎰 SUPERBALL KENO</h1>
 
 <div class="meters">
 
-<div>
-Credits
-<br>
-<span id="credits">1000</span>
+<div class="meter">
+<div class="label">CREDITS</div>
+<div id="credits">1000</div>
 </div>
 
-<div>
-Bet
-<br>
-<span id="bet">1</span>
+<div class="meter">
+<div class="label">BET</div>
+<div id="bet">1</div>
 </div>
 
-<div>
-Win
-<br>
-<span id="win">0</span>
+<div class="meter">
+<div class="label">WIN</div>
+<div id="win">0</div>
 </div>
 
 </div>
 
 </header>
 
+<main>
 
-<div id="game">
+<section id="keno-grid"></section>
 
-<div class="panel">
+<aside class="right">
 
-<h2>PAYTABLE</h2>
-
-<p>10 Hits — 5000</p>
-<p>9 Hits — 1500</p>
-<p>8 Hits — 300</p>
-<p>7 Hits — 50</p>
-<p>6 Hits — 8</p>
-<p>5 Hits — 3</p>
-<p>4 Hits — 1</p>
-
-</div>
-
-
-<div id="keno-grid"></div>
-
-
-<div class="panel">
-
-<h2>DRAW</h2>
+<h2>DRAWN BALLS</h2>
 
 <div id="drawn-balls"></div>
 
-</div>
-
-</div>
-
-
 <div class="controls">
 
-<button id="quickPick">
-Quick Pick
-</button>
+<button id="quickPick">Quick Pick</button>
 
-<button id="clear">
-Erase
-</button>
+<button id="clear">Erase</button>
 
-<button id="betDown">
-Bet -
-</button>
+<button id="betDown">Bet −</button>
 
-<button id="betUp">
-Bet +
-</button>
+<button id="betUp">Bet +</button>
 
-<button id="play">
-🎰 PLAY GAME
-</button>
+<button id="play">🎰 PLAY GAME</button>
 
 </div>
+
+</aside>
+
+</main>
 
 <script src="script.js"></script>
 
 </body>
-</html>
+  </html>
