@@ -199,6 +199,10 @@ for (const n of draw) {
 
     const ball = document.createElement("div");
     ball.className = "draw-ball";
+
+if (drawnNumbers.length === 20) {
+    ball.classList.add("superball");
+}
     ball.textContent = n;
 
     drawArea.appendChild(ball);
