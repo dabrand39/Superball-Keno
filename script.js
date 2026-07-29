@@ -12,9 +12,12 @@ const creditsEl = document.getElementById("credits");
 const betEl = document.getElementById("bet");
 const winEl = document.getElementById("win");
 
-let credits = 1000;
-let bet = 1;
+let credits = 4000;
+let bet = 0.25;
 let win = 0;
+
+let progressive = 4000.00;
+const progressiveMeter = document.getElementById("progressive");
 
 const MAX_PICKS = 10;
 const MAX_BET = 10;
@@ -46,6 +49,8 @@ function updateMeters() {
   creditsEl.textContent = credits;
   betEl.textContent = bet;
   winEl.textContent = win;
+  progressiveMeter.textContent =
+    "$" + progressive.toFixed(2);
 }
 function createBoard() {
 
