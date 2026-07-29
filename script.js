@@ -3,27 +3,40 @@ const drawArea = document.getElementById("drawn-balls");
 
 let credits = 1000;
 let bet = 1;
-let selected = [];
+let win = 0;
 
 const MAX_PICKS = 10;
+const MAX_BET = 10;
+
+let selected = [];
 
 function updateMeters() {
-    document.getElementById("credits").textContent = credits;
-    document.getElementById("bet").textContent = bet;
+    creditsEl.textContent = credits;
+    betEl.textContent = bet;
+    winEl.textContent = win;
 }
 
+const creditsEl = document.getElementById("credits");
+const betEl = document.getElementById("bet");
+const winEl = document.getElementById("win");
+
 function createBoard() {
+
     grid.innerHTML = "";
 
     for (let i = 1; i <= 80; i++) {
-        const cell = document.createElement("button");
-        cell.className = "number";
-        cell.textContent = i;
 
-        cell.onclick = () => {
+        const ball = document.createElement("button");
 
-            if (cell.classList.contains("selected")) {
-                cell.classList.remove("selected");
+        ball.className = "number";
+        ball.dataset.number = i;
+        ball.textContent = i;
+
+        ball.onclick = () => {
+
+            if (ball.classList.contains("selected")) {
+
+                ball.classList.remove("selected");
                 selected = selected.filter(n => n !== i);
                 return;
             }
@@ -32,12 +45,40 @@ function createBoard() {
                 return;
 
             selected.push(i);
-            cell.classList.add("selected");
+            ball.classList.add("selected");
         };
 
-        grid.appendChild(cell);
+        grid.appendChild(ball);
     }
 }
+document.getElementById("betUp").onclick = () => {
+    if (bet < MAX_BET) {
+        bet++;
+        updateMeters();
+    }
+};
+
+document.getElementById("betDown").onclick = () => {
+    if (bet > 1) {
+        bet--;
+        updateMeters();
+    }
+};
+
+document.getElementById("clear").onclick = () => {
+    selected = [];
+    win = 0;
+
+    drawArea.innerHTML = "";
+
+    document.querySelectorAll(".number").forEach(ball => {
+        ball.classList.remove("selected");
+        ball.classList.remove("hit");
+        ball.classList.remove("superball");
+    });
+
+    updateMeters();
+};
 
 document.getElementById("quickPick").onclick = () => {
 
@@ -45,134 +86,17 @@ document.getElementById("quickPick").onclick = () => {
 
     while (selected.length < MAX_PICKS) {
 
-        let n = Math.floor(Math.random() * 80) + 1;
+        const n = Math.floor(Math.random() * 80) + 1;
 
         if (!selected.includes(n)) {
-
             selected.push(n);
 
-            grid.children[n - 1].classList.add("selected");
+            document
+                .querySelector(`[data-number="${n}"]`)
+                .classList.add("selected");
         }
     }
 };
-
-document.getElementById("clear").onclick = () => {
-
-    selected = [];
-
-    drawArea.innerHTML = "";
-
-    document
-        .querySelectorAll(".number")
-        .forEach(b => {
-            b.classList.remove("selected");
-            b.classList.remove("hit");
-            b.classList.remove("superball");
-        });
-
-    document.getElementById("win").textContent = "0";
-};
-
-document.getElementById("betUp").onclick = () => {
-    bet++;
-    updateMeters();
-};
-
-document.getElementById("betDown").onclick = () => {
-    if (bet > 1) bet--;
-    updateMeters();
-};
-
-document.getElementById("play").onclick = () => {
-
-    if (selected.length === 0) {
-        alert("Select 1 to 10 numbers.");
-        return;
-    }
-
-    drawArea.innerHTML = "";
-
-    document
-        .querySelectorAll(".number")
-        .forEach(b => {
-            b.classList.remove("hit");
-            b.classList.remove("superball");
-        });
-
-    let balls = [];
-
-    while (balls.length < 20) {
-
-        let n = Math.floor(Math.random() * 80) + 1;
-
-        if (!balls.includes(n))
-            balls.push(n);
-    }
-
-    let hits = 0;
-
-    balls.forEach((ball, index) => {
-
-        setTimeout(() => {
-
-            const chip = document.createElement("div");
-            chip.textContent = ball;
-            chip.style.fontSize = "24px";
-            chip.style.margin = "6px";
-
-            if (index === 19)
-                chip.style.color = "#ff44ff";
-
-            drawArea.appendChild(chip);
-
-            const square = grid.children[ball - 1];
-
-            if (selected.includes(ball)) {
-
-                hits++;
-
-                square.classList.add("hit");
-
-                if (index === 19)
-                    square.classList.add("superball");
-            }
-
-            if (index === 19)
-                document.getElementById("win").textContent = hits;
-
-        }, index * 250);
-
-    });
-
-};
-
-createBoard();
-updateMeters();
-// ===== Animated Ball Draw =====
-
-async function animateDraw(numbers) {
-    const drawBox = document.getElementById("drawNumbers");
-    drawBox.innerHTML = "";
-
-    for (let i = 0; i < numbers.length; i++) {
-
-        const ball = document.createElement("div");
-        ball.className = "draw-ball";
-        ball.textContent = numbers[i];
-
-        drawBox.appendChild(ball);
-
-        const tile = document.querySelector(
-            `[data-number="${numbers[i]}"]`
-        );
-
-        if (tile) {
-            tile.classList.add("drawn");
-        }
-
-        await new Promise(r => setTimeout(r, 350));
-    }
-            }
 document.getElementById("play").onclick = async () => {
 
     if (selected.length === 0) {
@@ -187,55 +111,48 @@ document.getElementById("play").onclick = async () => {
 
     credits -= bet;
     win = 0;
-
     updateMeters();
 
     drawArea.innerHTML = "";
 
-    document.querySelectorAll(".number").forEach(n => {
-        n.classList.remove("hit");
-        n.classList.remove("superball");
+    document.querySelectorAll(".number").forEach(ball => {
+        ball.classList.remove("hit");
+        ball.classList.remove("superball");
     });
 
-    const balls = [];
+    const drawn = [];
 
-    while (balls.length < 20) {
-        let n = Math.floor(Math.random() * 80) + 1;
-
-        if (!balls.includes(n))
-            balls.push(n);
+    while (drawn.length < 20) {
+        const n = Math.floor(Math.random() * 80) + 1;
+        if (!drawn.includes(n)) drawn.push(n);
     }
 
     let hits = 0;
 
-    for (let i = 0; i < balls.length; i++) {
+    for (let i = 0; i < drawn.length; i++) {
 
-        const ball = balls[i];
+        const n = drawn[i];
 
         const chip = document.createElement("div");
-
         chip.className = "draw-ball";
-        chip.textContent = ball;
+        chip.textContent = n;
 
         if (i === 19)
             chip.classList.add("superball");
 
         drawArea.appendChild(chip);
 
-        const square =
-            document.querySelector(`[data-number="${ball}"]`);
+        const square = document.querySelector(`[data-number="${n}"]`);
 
-        if (selected.includes(ball)) {
-
+        if (selected.includes(n)) {
             hits++;
-
             square.classList.add("hit");
 
             if (i === 19)
                 square.classList.add("superball");
         }
 
-        await new Promise(r => setTimeout(r, 250));
+        await new Promise(resolve => setTimeout(resolve, 250));
     }
 
     const paytable = {
@@ -255,40 +172,6 @@ document.getElementById("play").onclick = async () => {
 
     updateMeters();
 };
-// ---------- Game Initialization ----------
 
 createBoard();
 updateMeters();
-
-console.log("Superball Keno Loaded");
-
-// Optional: Press Enter to play
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        document.getElementById("play").click();
-    }
-});
-
-// Optional: Double-click a selected number to remove it
-grid.addEventListener("dblclick", (e) => {
-
-    if (!e.target.classList.contains("number")) return;
-
-    const num = Number(e.target.dataset.number);
-
-    if (selected.includes(num)) {
-        selected = selected.filter(n => n !== num);
-        e.target.classList.remove("selected");
-    }
-
-});
-
-// Future Features:
-// - Superball multiplier
-// - Real Keno paytable
-// - Gamble feature
-// - DIP switch settings
-// - Auto Play
-// - Sound effects
-// - Ball blower animation
-// - Progressive jackpot
