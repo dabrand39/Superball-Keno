@@ -179,3 +179,33 @@ transform:translateY(0);
 opacity:1;
 }
 }
+.draw-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+    margin-top:10px;
+}
+
+.draw-ball{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#ffcf00;
+    color:#111;
+    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    box-shadow:0 0 8px gold;
+    animation:pop .25s ease;
+}
+
+@keyframes pop{
+    from{
+        transform:scale(0);
+    }
+    to{
+        transform:scale(1);
+    }
+        }
