@@ -181,9 +181,10 @@ sounds.click.play();
     playing = true;
 
     credits -= bet;
-    win = 0;
+progressive += bet * 0.02;
+win = 0;
 
-    updateMeters();
+updateMeters();
 
     drawnNumbers = [];
     drawArea.innerHTML = "";
