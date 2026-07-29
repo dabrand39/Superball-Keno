@@ -244,8 +244,11 @@ if (drawnNumbers.length === 20) {
         }
     );
           }
-    await sleep(400);
+  sounds.draw.currentTime = 0;
+sounds.draw.play();
 
+await sleep(400);
+  
 }
 
 const payout = paytable[hits] || 0;
