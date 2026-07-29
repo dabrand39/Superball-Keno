@@ -1,70 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Superball Keno</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superball Keno</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="top">
+  <div class="top">
 
-<h1>🎰 SUPERBALL KENO</h1>
+    <h1>🎰 SUPERBALL KENO</h1>
 
-<div class="meters">
+    <div class="meters">
 
-<div class="meter">
-<div class="label">CREDITS</div>
-<div id="credits">1000</div>
-</div>
+      <div class="meter">
+        <div class="label">CREDITS</div>
+        <div id="credits">1000</div>
+      </div>
 
-<div class="meter">
-<div class="label">BET</div>
-<div id="bet">1</div>
-</div>
+      <div class="meter">
+        <div class="label">BET</div>
+        <div id="bet">1</div>
+      </div>
 
-<div class="meter">
-<div class="label">WIN</div>
-<div id="win">0</div>
-</div>
+      <div class="meter">
+        <div class="label">WIN</div>
+        <div id="win">0</div>
+      </div>
 
-</div>
+    </div>
 
-</div>
+    <div class="controls">
+      <button id="quickPick">🎲 Quick Pick</button>
+      <button id="clear">🗑 Erase</button>
+      <button id="betDown">➖ Bet</button>
+      <button id="betUp">➕ Bet</button>
+      <button id="play">🎰 PLAY GAME</button>
+    </div>
 
-<main>
+  </div>
 
-<div id="keno-grid"></div>
+  <main>
 
-<div class="right">
+    <!-- Ball Drop Area -->
+    <section id="ball-drop">
+      <div id="ballContainer"></div>
+    </section>
 
-<h2>DRAWN BALLS</h2>
+    <!-- Keno Grid -->
+    <section id="keno-grid"></section>
 
-<div id="drawn-balls"></div>
+    <!-- Drawn Numbers -->
+    <section class="draw-panel">
+      <h2>Drawn Numbers</h2>
+      <div id="drawnNumbers"></div>
+    </section>
 
-<div class="controls">
+    <!-- Game Messages -->
+    <section class="message-panel">
+      <div id="message">Select up to 10 numbers and press PLAY.</div>
+    </section>
 
-<button id="quickPick">Quick Pick</button>
+  </main>
 
-<button id="clear">Erase</button>
-
-<button id="betDown">Bet -</button>
-
-<button id="betUp">Bet +</button>
-
-<button id="play">🎰 PLAY GAME</button>
-
-</div>
-
-</div>
-
-</main>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
-
-</html>
+  </html>
