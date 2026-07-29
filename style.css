@@ -57,7 +57,7 @@ main{
     padding:8px;
 }
 
-##keno-grid{
+#keno-grid{
     width:100%;
     max-width:300px;
     display:grid;
