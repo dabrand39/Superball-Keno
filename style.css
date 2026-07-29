@@ -131,3 +131,51 @@ main{
     border-radius:50%;
     background:radial-gradient(circle,#fff,#ffd84d,#c69200);
     color:#
+/* Ball Drop */
+
+#ball-drop{
+    height:90px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:12px 0;
+}
+
+.ball{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,#fff8b5,#ffd400,#d79b00);
+    color:#111;
+    font-size:28px;
+    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 0 20px gold;
+}
+
+.hidden{
+    visibility:hidden;
+}
+
+.drop{
+    animation:dropBall .35s ease;
+}
+
+@keyframes dropBall{
+
+0%{
+transform:translateY(-120px) scale(.4);
+opacity:0;
+}
+
+70%{
+transform:translateY(10px);
+}
+
+100%{
+transform:translateY(0);
+opacity:1;
+}
+}
