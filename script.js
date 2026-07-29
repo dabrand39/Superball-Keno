@@ -170,7 +170,7 @@ document.getElementById("play").onclick = async () => {
         credits += win;
     }
     function updateDrawBoard(){
-
+        
     const board = document.getElementById("drawnNumbers");
 
     board.innerHTML = "";
@@ -188,4 +188,19 @@ document.getElementById("play").onclick = async () => {
     });
 
 }
-    
+  function highlightHits(){
+
+    document.querySelectorAll(".number").forEach(tile=>{
+
+        const number = Number(tile.textContent);
+
+        if(
+            selectedNumbers.includes(number) &&
+            drawnNumbers.includes(number)
+        ){
+            tile.classList.add("hit");
+        }
+
+    });
+
+}  
