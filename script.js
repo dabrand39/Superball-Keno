@@ -148,3 +148,28 @@ document.getElementById("play").onclick = () => {
 
 createBoard();
 updateMeters();
+// ===== Animated Ball Draw =====
+
+async function animateDraw(numbers) {
+    const drawBox = document.getElementById("drawNumbers");
+    drawBox.innerHTML = "";
+
+    for (let i = 0; i < numbers.length; i++) {
+
+        const ball = document.createElement("div");
+        ball.className = "draw-ball";
+        ball.textContent = numbers[i];
+
+        drawBox.appendChild(ball);
+
+        const tile = document.querySelector(
+            `[data-number="${numbers[i]}"]`
+        );
+
+        if (tile) {
+            tile.classList.add("drawn");
+        }
+
+        await new Promise(r => setTimeout(r, 350));
+    }
+            }
