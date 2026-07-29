@@ -177,18 +177,12 @@ createBoard();
 updateMeters();
 const currentBall = document.getElementById("currentBall");
 
-async function showBall(number){
+for (const number of drawNumbers) {
 
-    currentBall.classList.remove("hidden");
+    await showBall(number);
 
-    currentBall.classList.remove("drop");
+    drawnNumbers.push(number);
 
-    void currentBall.offsetWidth;
+    updateDrawBoard();
 
-    currentBall.textContent = number;
-
-    currentBall.classList.add("drop");
-
-    await new Promise(r=>setTimeout(r,450));
-
-    }
+}
