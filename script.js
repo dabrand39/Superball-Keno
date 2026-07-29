@@ -213,7 +213,7 @@ for (const n of draw) {
 
     }
 
-    await sleep(250);
+    await sleep(400);
 
 }
 
