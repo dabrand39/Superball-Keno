@@ -212,7 +212,21 @@ for (const n of draw) {
             .classList.add("hit");
 
     }
+if (drawnNumbers.length === 20) {
+    ball.classList.add("superball");
 
+    ball.animate(
+        [
+            { transform: "scale(1)" },
+            { transform: "scale(1.3)" },
+            { transform: "scale(1)" }
+        ],
+        {
+            duration: 600,
+            iterations: 4
+        }
+    );
+          }
     await sleep(400);
 
 }
