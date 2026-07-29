@@ -1,72 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Superball Keno</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Superball Keno</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header class="topbar">
-    <h1>🎰 SUPERBALL KENO</h1>
+<header>
 
-    <div class="meters">
-        <div>Credits: <span id="credits">1000</span></div>
-        <div>Bet: <span id="bet">1</span></div>
-        <div>Win: <span id="win">0</span></div>
-    </div>
+<div class="title">
+🎰 SUPERBALL KENO
+</div>
+
+<div class="meters">
+
+<div>
+Credits
+<br>
+<span id="credits">1000</span>
+</div>
+
+<div>
+Bet
+<br>
+<span id="bet">1</span>
+</div>
+
+<div>
+Win
+<br>
+<span id="win">0</span>
+</div>
+
+</div>
+
 </header>
 
-<main>
 
-<section class="paytable">
-    <h2>PAYTABLE</h2>
+<div id="game">
 
-    <table>
-        <tr><td>10 Hits</td><td>5000</td></tr>
-        <tr><td>9 Hits</td><td>1500</td></tr>
-        <tr><td>8 Hits</td><td>300</td></tr>
-        <tr><td>7 Hits</td><td>50</td></tr>
-        <tr><td>6 Hits</td><td>8</td></tr>
-        <tr><td>5 Hits</td><td>3</td></tr>
-        <tr><td>4 Hits</td><td>1</td></tr>
-    </table>
-</section>
+<div class="panel">
 
-<section>
+<h2>PAYTABLE</h2>
+
+<p>10 Hits — 5000</p>
+<p>9 Hits — 1500</p>
+<p>8 Hits — 300</p>
+<p>7 Hits — 50</p>
+<p>6 Hits — 8</p>
+<p>5 Hits — 3</p>
+<p>4 Hits — 1</p>
+
+</div>
+
 
 <div id="keno-grid"></div>
 
-</section>
 
-<section class="draw-panel">
+<div class="panel">
 
-<h2>Draw</h2>
+<h2>DRAW</h2>
 
 <div id="drawn-balls"></div>
 
-</section>
+</div>
 
-</main>
+</div>
 
-<footer>
 
-<button id="quickPick">Quick Pick</button>
+<div class="controls">
 
-<button id="clear">Erase</button>
+<button id="quickPick">
+Quick Pick
+</button>
 
-<button id="betDown">Bet -</button>
+<button id="clear">
+Erase
+</button>
 
-<button id="betUp">Bet +</button>
+<button id="betDown">
+Bet -
+</button>
 
-<button id="play">PLAY GAME</button>
+<button id="betUp">
+Bet +
+</button>
 
-</footer>
+<button id="play">
+🎰 PLAY GAME
+</button>
+
+</div>
 
 <script src="script.js"></script>
 
 </body>
-  </html>
+</html>
