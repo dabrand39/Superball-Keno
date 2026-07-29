@@ -54,14 +54,16 @@ function createBoard() {
 document.getElementById("betUp").onclick = () => {
     if (bet < MAX_BET) {
         bet++;
-        updateMeters();
+    createBoard();
+updateMeters();
     }
 };
 
 document.getElementById("betDown").onclick = () => {
     if (bet > 1) {
         bet--;
-        updateMeters();
+    createBoard();
+updateMeters();
     }
 };
 
@@ -77,7 +79,8 @@ document.getElementById("clear").onclick = () => {
         ball.classList.remove("superball");
     });
 
-    updateMeters();
+    createBoard();
+   updateMeters();
 };
 
 document.getElementById("quickPick").onclick = () => {
@@ -111,7 +114,8 @@ document.getElementById("play").onclick = async () => {
 
     credits -= bet;
     win = 0;
-    updateMeters();
+    createBoard();
+updateMeters();
 
     drawArea.innerHTML = "";
 
@@ -199,7 +203,7 @@ playing = false;
         const number = Number(tile.textContent);
 
         if(
-            selectedNumbers.includes(number) &&
+            selected.includes(number) &&
             drawnNumbers.includes(number)
         ){
             tile.classList.add("hit");
@@ -208,3 +212,6 @@ playing = false;
     });
 
 }  
+createBoard();
+updateMeters();
+    
