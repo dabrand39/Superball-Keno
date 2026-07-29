@@ -57,13 +57,13 @@ main{
     padding:8px;
 }
 
-#keno-grid{
+##keno-grid{
     width:100%;
-    max-width:320px;
+    max-width:300px;
     display:grid;
     grid-template-columns:repeat(10,1fr);
     gap:2px;
-    margin:10px auto;
+    margin:8px auto;
 }
 
 .number{
@@ -72,8 +72,8 @@ main{
     border:none;
     border-radius:50%;
     background:#2d6cff;
-    color:white;
-    font-size:12px;
+    color:#fff;
+    font-size:11px;
     font-weight:bold;
     display:flex;
     align-items:center;
