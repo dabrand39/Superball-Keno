@@ -1,5 +1,16 @@
+// =====================================
+// SUPERBALL KENO
+// Part 1 - Setup
+// =====================================
+
 const grid = document.getElementById("keno-grid");
-const drawArea = document.getElementById("drawn-Numbers");
+const drawArea = document.getElementById("drawnNumbers");
+const currentBall = document.getElementById("currentBall");
+const message = document.getElementById("message");
+
+const creditsEl = document.getElementById("credits");
+const betEl = document.getElementById("bet");
+const winEl = document.getElementById("win");
 
 let credits = 1000;
 let bet = 1;
@@ -9,81 +20,113 @@ const MAX_PICKS = 10;
 const MAX_BET = 10;
 
 let selected = [];
+let drawnNumbers = [];
+let playing = false;
+
+const paytable = {
+  0: 0,
+  1: 0,
+  2: 2,
+  3: 5,
+  4: 20,
+  5: 50,
+  6: 100,
+  7: 250,
+  8: 500,
+  9: 1000,
+  10: 5000
+};
 
 function updateMeters() {
-    creditsEl.textContent = credits;
-    betEl.textContent = bet;
-    winEl.textContent = win;
+  creditsEl.textContent = credits;
+  betEl.textContent = bet;
+  winEl.textContent = win;
 }
-
-const creditsEl = document.getElementById("credits");
-const betEl = document.getElementById("bet");
-const winEl = document.getElementById("win");
 
 function createBoard() {
 
-    grid.innerHTML = "";
+  grid.innerHTML = "";
 
-    for (let i = 1; i <= 80; i++) {
+  for (let i = 1; i <= 80; i++) {
 
-        const ball = document.createElement("button");
+    const tile = document.createElement("button");
 
-        ball.className = "number";
-        ball.dataset.number = i;
-        ball.textContent = i;
+    tile.className = "number";
+    tile.textContent = i;
+    tile.dataset.number = i;
 
-        ball.onclick = () => {
+    tile.onclick = () => {
 
-            if (ball.classList.contains("selected")) {
+      if (playing) return;
 
-                ball.classList.remove("selected");
-                selected = selected.filter(n => n !== i);
-                return;
-            }
+      if (selected.includes(i)) {
 
-            if (selected.length >= MAX_PICKS)
-                return;
+        selected = selected.filter(n => n !== i);
+        tile.classList.remove("selected");
 
-            selected.push(i);
-            ball.classList.add("selected");
-        };
+      } else {
 
-        grid.appendChild(ball);
-    }
+        if (selected.length >= MAX_PICKS) return;
+
+        selected.push(i);
+        tile.classList.add("selected");
+
+      }
+
+      message.textContent =
+        `Selected ${selected.length} of ${MAX_PICKS}`;
+
+    };
+
+    grid.appendChild(tile);
+
+  }
+
 }
+// =====================================
+// SUPERBALL KENO
+// Part 2 - Controls & Drawing
+// =====================================
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 document.getElementById("betUp").onclick = () => {
+    if (playing) return;
+
     if (bet < MAX_BET) {
         bet++;
-    createBoard();
-updateMeters();
+        updateMeters();
     }
 };
 
 document.getElementById("betDown").onclick = () => {
+    if (playing) return;
+
     if (bet > 1) {
         bet--;
-    createBoard();
-updateMeters();
+        updateMeters();
     }
 };
 
 document.getElementById("clear").onclick = () => {
+
+    if (playing) return;
+
     selected = [];
-    win = 0;
 
-    drawArea.innerHTML = "";
-
-    document.querySelectorAll(".number").forEach(ball => {
-        ball.classList.remove("selected");
-        ball.classList.remove("hit");
-        ball.classList.remove("superball");
+    document.querySelectorAll(".number").forEach(tile => {
+        tile.classList.remove("selected");
+        tile.classList.remove("hit");
     });
 
-    createBoard();
-   updateMeters();
+    message.textContent = "Selections cleared.";
 };
 
 document.getElementById("quickPick").onclick = () => {
+
+    if (playing) return;
 
     document.getElementById("clear").click();
 
@@ -92,6 +135,7 @@ document.getElementById("quickPick").onclick = () => {
         const n = Math.floor(Math.random() * 80) + 1;
 
         if (!selected.includes(n)) {
+
             selected.push(n);
 
             document
@@ -99,119 +143,114 @@ document.getElementById("quickPick").onclick = () => {
                 .classList.add("selected");
         }
     }
+
+    message.textContent = "Quick Pick complete.";
 };
+
 document.getElementById("play").onclick = async () => {
 
+    if (playing) return;
+
     if (selected.length === 0) {
-        alert("Select 1 to 10 numbers.");
+        message.textContent = "Select 1 to 10 numbers.";
         return;
     }
 
     if (credits < bet) {
-        alert("Not enough credits.");
+        message.textContent = "Not enough credits.";
         return;
     }
 
+    playing = true;
+
     credits -= bet;
     win = 0;
-    createBoard();
-updateMeters();
 
+    updateMeters();
+
+    drawnNumbers = [];
     drawArea.innerHTML = "";
 
-    document.querySelectorAll(".number").forEach(ball => {
-        ball.classList.remove("hit");
-        ball.classList.remove("superball");
-    });
+    message.textContent = "Drawing...";
+    // =====================================
+// SUPERBALL KENO
+// Part 3 - Draw & Payout
+// =====================================
 
-    const drawn = [];
+const draw = [];
 
-    while (drawn.length < 20) {
-        const n = Math.floor(Math.random() * 80) + 1;
-        if (!drawn.includes(n)) drawn.push(n);
+while (draw.length < 20) {
+
+    const n = Math.floor(Math.random() * 80) + 1;
+
+    if (!draw.includes(n)) {
+        draw.push(n);
+    }
+}
+
+let hits = 0;
+
+for (const n of draw) {
+
+    currentBall.classList.remove("hidden");
+    currentBall.textContent = n;
+
+    drawnNumbers.push(n);
+
+    const ball = document.createElement("div");
+    ball.className = "draw-ball";
+    ball.textContent = n;
+
+    drawArea.appendChild(ball);
+
+    if (selected.includes(n)) {
+
+        hits++;
+
+        document
+            .querySelector(`[data-number="${n}"]`)
+            .classList.add("hit");
+
     }
 
-    let hits = 0;
-
-    for (let i = 0; i < drawn.length; i++) {
-
-        const n = drawn[i];
-
-        const chip = document.createElement("div");
-        chip.className = "draw-ball";
-        chip.textContent = n;
-
-        if (i === 19)
-            chip.classList.add("superball");
-
-        drawArea.appendChild(chip);
-
-        const square = document.querySelector(`[data-number="${n}"]`);
-
-        if (selected.includes(n)) {
-            hits++;
-            square.classList.add("hit");
-
-            if (i === 19)
-                square.classList.add("superball");
-        }
-
-        await new Promise(resolve => setTimeout(resolve, 250));
-    }
-
-    const paytable = {
-        4: 1,
-        5: 3,
-        6: 8,
-        7: 50,
-        8: 300,
-        9: 1500,
-        10: 5000
-    };
-
-    if (paytable[hits]) {
-        win = paytable[hits] * bet;
-        credits += win;
-    }
-    highlightHits();
-    updateMeters();
-playing = false;
-    
-    function updateDrawBoard(){
-        
-    const board = document.getElementById("drawnNumbers");
-
-    board.innerHTML = "";
-
-    drawnNumbers.forEach(number=>{
-
-        const ball=document.createElement("div");
-
-        ball.className="draw-ball";
-
-        ball.textContent=number;
-
-        board.appendChild(ball);
-
-    });
+    await sleep(250);
 
 }
-  function highlightHits(){
 
-    document.querySelectorAll(".number").forEach(tile=>{
+const payout = paytable[hits] || 0;
 
-        const number = Number(tile.textContent);
+if (payout > 0) {
 
-        if(
-            selected.includes(number) &&
-            drawnNumbers.includes(number)
-        ){
-            tile.classList.add("hit");
-        }
+    win = payout * bet;
+    credits += win;
 
-    });
+    message.textContent =
+        `🎉 ${hits} hits! You won ${win} credits!`;
 
-}  
+} else {
+
+    win = 0;
+
+    message.textContent =
+        `No win. ${hits} hit${hits === 1 ? "" : "s"}.`;
+
+}
+
+updateMeters();
+
+playing = false;
+
+currentBall.classList.add("hidden");
+};
+// =====================================
+// SUPERBALL KENO
+// Part 4 - Initialize Game
+// =====================================
+
 createBoard();
 updateMeters();
-    
+
+message.textContent =
+    "Welcome to Superball Keno! Select up to 10 numbers.";
+
+currentBall.classList.add("hidden");
