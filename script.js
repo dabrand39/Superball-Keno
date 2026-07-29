@@ -36,7 +36,12 @@ const paytable = {
   9: 1000,
   10: 5000
 };
-
+const sounds = {
+    click: new Audio("sounds/click.mp3"),
+    draw: new Audio("sounds/draw.mp3"),
+    win: new Audio("sounds/win.mp3"),
+    superball: new Audio("sounds/superball.mp3")
+};
 function updateMeters() {
   creditsEl.textContent = credits;
   betEl.textContent = bet;
@@ -93,6 +98,8 @@ function sleep(ms) {
 }
 
 document.getElementById("betUp").onclick = () => {
+  sounds.click.currentTime = 0;
+sounds.click.play();
     if (playing) return;
 
     if (bet < MAX_BET) {
@@ -102,6 +109,8 @@ document.getElementById("betUp").onclick = () => {
 };
 
 document.getElementById("betDown").onclick = () => {
+  sounds.click.currentTime = 0;
+sounds.click.play();
     if (playing) return;
 
     if (bet > 1) {
@@ -111,7 +120,8 @@ document.getElementById("betDown").onclick = () => {
 };
 
 document.getElementById("clear").onclick = () => {
-
+  sounds.click.currentTime = 0;
+sounds.click.play();
     if (playing) return;
 
     selected = [];
@@ -125,6 +135,8 @@ document.getElementById("clear").onclick = () => {
 };
 
 document.getElementById("quickPick").onclick = () => {
+  sounds.click.currentTime = 0;
+sounds.click.play();
 
     if (playing) return;
 
@@ -148,7 +160,8 @@ document.getElementById("quickPick").onclick = () => {
 };
 
 document.getElementById("play").onclick = async () => {
-
+sounds.click.currentTime = 0;
+sounds.click.play();
     if (playing) return;
 
     if (selected.length === 0) {
